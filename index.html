@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style type="text/css">
+td {width:100px;height:100px;}
+svg {width:100px;height:100px;}
+polygon {stroke:black;stroke-width:1}
+</style>
+</head>
+
+<body>
+
+<table border="1">
+	<tr>
+		<td id = "cell_0"><svg id = "svg_0" /></td>
+		<td id = "cell_1"><svg id = "svg_1" /></td>
+		<td id = "cell_2"><svg id = "svg_2" /></td>
+		<td id = "cell_3"><svg id = "svg_3" /></td>
+	</tr>
+		<tr>
+		<td id = "cell_4"><svg id = "svg_4" /></td>
+		<td id = "cell_5"><svg id = "svg_5" /></td>
+		<td id = "cell_6"><svg id = "svg_6" /></td>
+		<td id = "cell_7"><svg id = "svg_7" /></td>
+	</tr>
+		<tr>
+		<td id = "cell_8"><svg id = "svg_8" /></td>
+		<td id = "cell_9"><svg id = "svg_9" /></td>
+		<td id = "cell_10"><svg id = "svg_10" /></td>
+		<td id = "cell_11"><svg id = "svg_11" /></td>
+	</tr>
+		<tr>
+		<td id = "cell_12"><svg id = "svg_12" /></td>
+		<td id = "cell_13"><svg id = "svg_13" /></td>
+		<td id = "cell_14"><svg id = "svg_14" /></td>
+		<td id = "cell_15"><svg id = "svg_15" /></td>
+	</tr>
+
+</table>
+
+<div id="counter" />
+
+<script type="text/javascript">
+	data = null;
+	size = 0;
+	index = 0;
+
+	function step() {
+		d3.select("#cell_0").attr("bgcolor","white");
+		d3.select("#cell_1").attr("bgcolor","white");
+		d3.select("#cell_2").attr("bgcolor","white");
+		d3.select("#cell_3").attr("bgcolor","white");
+		d3.select("#cell_4").attr("bgcolor","white");
+		d3.select("#cell_6").attr("bgcolor","white");
+		d3.select("#cell_8").attr("bgcolor","white");
+		d3.select("#cell_9").attr("bgcolor","white");
+		d3.select("#cell_10").attr("bgcolor","white");
+		d3.select("#cell_13").attr("bgcolor","white");
+		d3.select("#cell_14").attr("bgcolor","white");
+
+		d3.select("#cell_5").attr("bgcolor","orange");
+		d3.select("#cell_7").attr("bgcolor","orange");
+		d3.select("#cell_11").attr("bgcolor","orange");
+		d3.select("#cell_12").attr("bgcolor","orange");
+		d3.select("#cell_15").attr("bgcolor","#00FF00");
+
+		var ob = data["ob_list"][index];
+		id = "#cell_" + ob;
+		d3.select(id).attr("bgcolor","red");
+		d3.select("#counter").text("step " + index);
+
+		var q = data["q_list"][index];
+		var color = d3.scaleLinear()
+		    .domain([0.0, 1.0])
+		    .range(["white", "green"]);
+
+		for (i=0;i<=15;i++)
+		{
+			if (i != 5 && i != 7 && i != 11 && i != 12 && i != 15)
+			{
+				var svgId = "#svg_" + i;
+				svg = d3.select(svgId);
+				svg.html('');
+				tri_up = svg.append('polygon').attr('points','50 0, 25 25, 75,25');
+				tri_down = svg.append('polygon').attr('points','50 100, 25 75, 75,75');
+				tri_left = svg.append('polygon').attr('points','0 50, 25 25, 25,75');
+				tri_right = svg.append('polygon').attr('points','100 50, 75 25, 75,75');
+				
+				var cell = q[i];
+				tri_left.attr('fill',color(cell[0]));
+				tri_down.attr('fill',color(cell[1]));
+				tri_right.attr('fill',color(cell[2]));
+				tri_up.attr('fill',color(cell[3]));
+			}
+
+		}
+
+		
+		index = index + 1;
+		if (index <= size - 1)
+		{
+			setTimeout(step,5);
+		}
+		
+	}
+
+	function populate(e, d) {
+		console.log(e, d);
+		data = d;
+		size = data["ob_list"].length;
+
+
+		setTimeout(step,5);
+	}
+
+	d3.json("data.json", populate);
+</script>
+</body>
+</html>

@@ -75,7 +75,7 @@ $ python frozenLakeQ.py
 $ python -m http.server
 ```
 
-打开 Chrome 浏览器，地址栏输入 http://127.0.0.1:8000，即可看到如下所示的学习过程：
+打开 Chrome 浏览器，地址栏输入 http://127.0.0.1:8000 ，即可看到如下所示的学习过程：
 
 ![image](https://github.com/foamliu/Visualize-Q-Learning/raw/master/images/learning_process.gif)
 

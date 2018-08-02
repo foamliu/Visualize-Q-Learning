@@ -27,7 +27,7 @@ Gym用Python编写，它有很多的环境，比如机器人模拟或Atari 游�
 
 ## FrozenLake-v0
 
-FrozenLake-v0 即冰湖是 OpenAI Gym 中经典的强化学习环境。在一个格子世界中，通过上下左右移动，躲避冰洞，到达目标。
+[FrozenLake-v0](https://gym.openai.com/envs/FrozenLake-v0/) 即冰湖是 OpenAI Gym 中经典的强化学习环境。在一个格子世界中，通过上下左右移动，躲避冰洞，到达目标。
 
 ![image](https://github.com/foamliu/Visualize-Q-Learning/raw/master/images/FrozenLake-v0.png)
 
